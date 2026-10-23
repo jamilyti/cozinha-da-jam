@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="/favicon.jpeg">
+    <title>Administração | Cozinha da Jam</title>
+
+    <style>
+        ```css
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --rosa-principal: #e85d91;
+    --rosa-escuro: #d9467d;
+    --rosa-claro: #fff0f5;
+    --rosa-borda: #f7c5d8;
+    --rosa-texto: #c94d7d;
+    --branco: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff8fb;
+    color: #75445a;
+}
+
+header {
+    background: var(--rosa-principal);
+    color: var(--branco);
+    padding: 22px 6%;
+}
+
+header h1 {
+    margin: 0 0 8px;
+    font-family: Georgia, serif;
+}
+
+header p {
+    margin: 0;
+    color: #fff0f5;
+}
+
+main {
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+.painel {
+    background: var(--branco);
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid var(--rosa-borda);
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(232, 93, 145, 0.06);
+}
+
+h2 {
+    margin-top: 0;
+    font-family: Georgia, serif;
+    color: var(--rosa-principal);
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.campo.completo {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--rosa-texto);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--rosa-borda);
+    border-radius: 8px;
+    font: inherit;
+    background: var(--branco);
+    color: #75445a;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--rosa-principal);
+    box-shadow: 0 0 0 3px rgba(232, 93, 145, 0.12);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #c9a1b2;
+}
+
+textarea {
+    min-height: 85px;
+    resize: vertical;
+}
+
+.disponibilidade {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.disponibilidade input {
+    width: auto;
+    accent-color: var(--rosa-principal);
+}
+
+.acoes {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+button {
+    border: 0;
+    padding: 11px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.2s, transform 0.2s;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+.principal {
+    background: var(--rosa-principal);
+    color: var(--branco);
+}
+
+.principal:hover {
+    background: var(--rosa-escuro);
+}
+
+.secundario,
+.editar {
+    background: #fde4ee;
+    color: var(--rosa-texto);
+}
+
+.secundario:hover,
+.editar:hover {
+    background: #fbd3e2;
+}
+
+.excluir {
+    background: #d9467d;
+    color: var(--branco);
+}
+
+.excluir:hover {
+    background: #bd3568;
+}
+
+#mensagem {
+    margin-top: 16px;
+    line-height: 1.5;
+    color: var(--rosa-texto);
+}
+
+.lista {
+    display: grid;
+    gap: 15px;
+}
+
+.produto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border: 1px solid #f8d8e5;
+    background: #fffdfd;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+.produto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border: 1px solid #f8d8e5;
+    background: #fffdfd;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+.produto-conteudo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 1;
+    min-width: 220px;
+}
+
+
+.produto-imagem {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+.produto-foto {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #f7c5d8;
+    background: #fff0f5;
+    flex-shrink: 0;
+}
+@media (max-width: 600px) {
+    .produto-foto {
+        width: 50px;
+        height: 50px;
+    }
+
+    .produto-imagem {
+        height: 140px;
+    }
+}
+
+
+.produto h3 {
+    margin: 0 0 8px;
+    color: var(--rosa-texto);
+}
+
+.produto p {
+    margin: 5px 0;
+    color: #a7798d;
+    overflow-wrap: anywhere;
+}
+
+.botoes {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.status {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--rosa-texto);
+    background: var(--rosa-claro);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+@media (max-width: 600px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    .campo.completo,
+    .acoes {
+        grid-column: auto;
+    }
+
+    .painel {
+        padding: 18px;
+    }
+}
+```
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Cozinha da Jam</h1>
+    <p>Painel administrativo de produtos</p>
+</header>
+
+<main>
+    <section class="painel">
+        <h2 id="tituloFormulario">Cadastrar produto</h2>
+
+        <form id="formProduto">
+            <div class="campo">
+                <label for="nome">Nome do produto *</label>
+                <input id="nome" required maxlength="100">
+            </div>
+
+            <div class="campo">
+                <label for="preco">Preço (R$) *</label>
+                <input id="preco" type="number"
+                       min="0.01" step="0.01" required>
+            </div>
+
+            <div class="campo completo">
+                <label for="descricao">Descrição</label>
+                <textarea id="descricao" maxlength="500"></textarea>
+            </div>
+
+            <div class="campo">
+                <label for="estoque">Quantidade em estoque *</label>
+                <input id="estoque" type="number"
+                       min="0" step="1" required value="0">
+            </div>
+
+            <div class="campo completo">
+                <label class="disponibilidade">
+                    <input id="ativo" type="checkbox" checked>
+                    Produto disponível na loja
+                </label>
+            </div>
+
+            <div class="acoes">
+                <button class="principal" type="submit">
+                    Salvar produto
+                </button>
+
+                <button class="secundario" type="button"
+                        id="cancelar" hidden>
+                    Cancelar edição
+                </button>
+            </div>
+        </form>
+
+        <p id="mensagem" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="painel">
+        <h2>Produtos cadastrados</h2>
+        <div id="listaProdutos" class="lista">
+            Carregando produtos...
+        </div>
+    </section>
+</main>
+
+<script>
+    const API = "/api/produtos";
+
+    const formulario = document.getElementById("formProduto");
+    const mensagem = document.getElementById("mensagem");
+    const lista = document.getElementById("listaProdutos");
+    const tituloFormulario = document.getElementById("tituloFormulario");
+    const botaoCancelar = document.getElementById("cancelar");
+
+    let idEmEdicao = null;
+
+    function mostrarMensagem(texto, erro = false) {
+        mensagem.textContent = texto;
+        mensagem.style.color = erro ? "#a83232" : "#276738";
+    }
+
+
+async function requisicao(url, opcoes = {}) {
+    const metodo = (opcoes.method || "GET").toUpperCase();
+
+    // Para operações que modificam dados, obter o token CSRF.
+    if (!["GET", "HEAD", "OPTIONS", "TRACE"].includes(metodo)) {
+        const respostaCsrf = await fetch("/csrf", {
+            credentials: "same-origin"
+        });
+
+        if (!respostaCsrf.ok) {
+            throw new Error(
+                `Não foi possível obter o token CSRF: HTTP ${respostaCsrf.status}`
+            );
+        }
+
+        const csrf = await respostaCsrf.json();
+
+        opcoes.headers = {
+            ...(opcoes.headers || {}),
+            [csrf.headerName]: csrf.token
+        };
+    }
+
+    const resposta = await fetch(url, {
+        ...opcoes,
+        credentials: "same-origin"
+    });
+
+    if (!resposta.ok) {
+        throw new Error(
+            `Erro HTTP ${resposta.status}: ${resposta.statusText}`
+        );
+    }
+
+    if (resposta.status === 204) {
+        return null;
+    }
+
+    const tipoConteudo = resposta.headers.get("content-type") || "";
+
+    if (tipoConteudo.includes("application/json")) {
+        return resposta.json();
+    }
+
+    return null;
+}
+
+
+    function limparFormulario() {
+        formulario.reset();
+        idEmEdicao = null;
+        tituloFormulario.textContent = "Cadastrar produto";
+        botaoCancelar.hidden = true;
+        document.getElementById("estoque").value = 0;
+        document.getElementById("ativo").checked = true;
+    }
+
+    async function carregarProdutos() {
+        lista.textContent = "Carregando produtos...";
+
+        try {
+            const produtos = await requisicao(API);
+            lista.replaceChildren();
+
+            if (produtos.length === 0) {
+                lista.textContent = "Nenhum produto cadastrado.";
+                return;
+            }
+
+            produtos.forEach(produto => {
+                const card = document.createElement("article");
+                card.className = "produto";
+
+
+const conteudo = document.createElement("div");
+conteudo.className = "produto-conteudo";
+
+const informacoes = document.createElement("div");
+
+if (produto.imagem) {
+    const imagem = document.createElement("img");
+
+    imagem.className = "produto-foto";
+    imagem.src = produto.imagem;
+    imagem.alt = produto.nome;
+    imagem.onerror = () => {
+        imagem.style.display = "none";
+    };
+
+    conteudo.appendChild(imagem);
+}
+
+                const nome = document.createElement("h3");
+                nome.textContent = produto.nome;
+
+                const preco = document.createElement("p");
+                preco.textContent = Number(produto.preco).toLocaleString(
+                    "pt-BR",
+                    { style: "currency", currency: "BRL" }
+                );
+
+                const estoque = document.createElement("p");
+                estoque.textContent = `Estoque: ${produto.estoque}`;
+
+                const status = document.createElement("p");
+                status.className = "status";
+                status.textContent = produto.ativo
+                    ? "Disponível na loja"
+                    : "Indisponível na loja";
+
+                informacoes.append(nome, preco, estoque, status);
+
+                conteudo.appendChild(informacoes);
+
+                const botoes = document.createElement("div");
+                botoes.className = "botoes";
+
+                const botaoEditar = document.createElement("button");
+                botaoEditar.className = "editar";
+                botaoEditar.textContent = "Editar";
+                botaoEditar.addEventListener("click", () => {
+                    editarProduto(produto);
+                });
+
+                const botaoExcluir = document.createElement("button");
+                botaoExcluir.className = "excluir";
+                botaoExcluir.textContent = "Excluir";
+                botaoExcluir.addEventListener("click", () => {
+                    excluirProduto(produto);
+                });
+
+                botoes.append(botaoEditar, botaoExcluir);
+                card.append(conteudo, botoes);
+                lista.append(card);
+            });
+
+        } catch (erro) {
+            lista.textContent = "Não foi possível carregar os produtos.";
+            mostrarMensagem(erro.message, true);
+        }
+    }
+
+    function editarProduto(produto) {
+        idEmEdicao = produto.id;
+
+        document.getElementById("nome").value = produto.nome ?? "";
+        document.getElementById("descricao").value =
+            produto.descricao ?? "";
+        document.getElementById("preco").value = produto.preco ?? "";
+        document.getElementById("imagem").value = produto.imagem ?? "";
+        document.getElementById("estoque").value = produto.estoque ?? 0;
+        document.getElementById("ativo").checked =
+            produto.ativo === true;
+
+        tituloFormulario.textContent = `Editar produto #${produto.id}`;
+        botaoCancelar.hidden = false;
+
+        formulario.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+    formulario.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const produto = {
+            nome: document.getElementById("nome").value.trim(),
+            descricao: document.getElementById("descricao").value.trim(),
+            preco: Number(document.getElementById("preco").value),
+            imagem: document.getElementById("imagem").value.trim(),
+            estoque: Number(document.getElementById("estoque").value),
+            ativo: document.getElementById("ativo").checked
+        };
+
+        if (!produto.nome || !Number.isFinite(produto.preco)
+                || produto.preco <= 0
+                || !Number.isInteger(produto.estoque)
+                || produto.estoque < 0) {
+            mostrarMensagem(
+                "Confira o nome, o preço e o estoque informado.",
+                true
+            );
+            return;
+        }
+
+        try {
+            const editando = idEmEdicao !== null;
+            const url = editando ? `${API}/${idEmEdicao}` : API;
+
+            await requisicao(url, {
+                method: editando ? "PUT" : "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(produto)
+            });
+
+            limparFormulario();
+            mostrarMensagem(
+                editando
+                    ? "Produto atualizado com sucesso!"
+                    : "Produto cadastrado com sucesso!"
+            );
+
+            await carregarProdutos();
+
+        } catch (erro) {
+            mostrarMensagem(erro.message, true);
+        }
+    });
+
+    botaoCancelar.addEventListener("click", () => {
+        limparFormulario();
+        mostrarMensagem("Edição cancelada.");
+    });
+
+    async function excluirProduto(produto) {
+        const confirmar = window.confirm(
+            `Deseja realmente excluir "${produto.nome}"?`
+        );
+
+        if (!confirmar) {
+            return;
+        }
+
+        try {
+            await requisicao(`${API}/${produto.id}`, {
+                method: "DELETE"
+            });
+
+            if (idEmEdicao === produto.id) {
+                limparFormulario();
+            }
+
+            mostrarMensagem("Produto excluído com sucesso!");
+            await carregarProdutos();
+        } catch (erro) {
+            mostrarMensagem(erro.message, true);
+        }
+    }
+
+    carregarProdutos();
+</script>
+
+</body>
+</html>

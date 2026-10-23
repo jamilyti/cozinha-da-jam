@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Administrativo | Cozinha da Jam</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fff7f8, #fce4ec);
+            padding: 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(120, 70, 80, 0.12);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #a64d79;
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 28px;
+            font-size: 14px;
+        }
+
+        .field {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            color: #60434d;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ead5de;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #c77d9b;
+            box-shadow: 0 0 0 3px #fce4ec;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #b85c83;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        button:hover {
+            background: #98476b;
+        }
+
+        .message {
+            margin-top: 18px;
+            color: #b42318;
+            font-size: 14px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #a64d79;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+<main class="login-card">
+    <div class="logo">🍰</div>
+
+    <h1>Cozinha da Jam</h1>
+    <p class="subtitle">Acesse o painel administrativo</p>
+
+
+    <form id="login-form">
+        <div class="field">
+            <label for="username">Usuário</label>
+            <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Digite seu usuário"
+                    autocomplete="username"
+                    required
+            >
+        </div>
+
+        <div class="field">
+            <label for="password">Senha</label>
+            <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                    required
+            >
+        </div>
+
+        <button type="submit">Entrar</button>
+
+        <p class="message" id="error-message" hidden>
+            Não foi possível entrar. Verifique usuário e senha.
+        </p>
+    </form>
+
+
+    <a href="/index.html" class="back-link">
+        ← Voltar para a loja
+    </a>
+</main>
+
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const errorMessage = document.getElementById("error-message");
+
+    if (params.has("error")) {
+        errorMessage.hidden = false;
+    }
+
+    document.getElementById("login-form").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        errorMessage.hidden = true;
+
+        try {
+            const csrfResponse = await fetch("/csrf");
+            if (!csrfResponse.ok) {
+                throw new Error("Não foi possível obter o token de segurança.");
+            }
+
+            const csrf = await csrfResponse.json();
+
+            const formData = new URLSearchParams();
+            formData.append("username", document.getElementById("username").value);
+            formData.append("password", document.getElementById("password").value);
+
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    [csrf.headerName]: csrf.token
+                },
+                body: formData.toString(),
+                credentials: "same-origin",
+                redirect: "follow"
+            });
+
+            if (response.redirected) {
+                window.location.href = response.url;
+            } else if (response.ok) {
+                window.location.href = "/admin.html";
+            } else {
+                errorMessage.hidden = false;
+            }
+        } catch (error) {
+            errorMessage.textContent =
+                "Erro ao conectar. Confira se a aplicação está funcionando.";
+            errorMessage.hidden = false;
+        }
+    });
+</script>
+</body>
+</html>
+
+</body>
+</html>

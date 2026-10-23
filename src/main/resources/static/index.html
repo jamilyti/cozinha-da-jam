@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="/favicon.jpeg">
+    <meta name="theme-color" content="#fff8fa">
+    <meta name="description"
+          content="Conheça os doces artesanais da Cozinha da Jam. Feitos com carinho para adoçar seus momentos especiais.">
+
+    <title>Cozinha da Jam | Doces feitos com carinho</title>
+
+    <style>
+        :root {
+            --rosa: #f6dce5;
+            --rosa-claro: #fff6f9;
+            --rosa-medio: #e9b8ca;
+            --rosa-escuro: #a65373;
+            --dourado: #c5a15b;
+            --dourado-claro: #ead9ae;
+            --branco: #ffffff;
+            --texto: #563c47;
+            --texto-suave: #8a747d;
+            --sombra: 0 12px 32px rgba(116, 69, 88, 0.09);
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--branco);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .topo {
+            background: var(--branco);
+            border-bottom: 1px solid #f3e4e9;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .marca {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .marca-icone {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            background: var(--rosa-claro);
+            border: 1px solid var(--dourado-claro);
+            border-radius: 50%;
+            font-size: 25px;
+        }
+
+        .marca h1 {
+            font-family: Georgia, serif;
+            font-size: 25px;
+            font-weight: normal;
+            color: var(--rosa-escuro);
+            line-height: 1.2;
+        }
+
+        .marca p {
+            color: var(--texto-suave);
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .navegacao {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            font-size: 14px;
+        }
+
+        .navegacao a:hover {
+            color: var(--rosa-escuro);
+        }
+
+        .botao {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 30px;
+            background: var(--rosa-escuro);
+            color: white;
+            border: 1px solid var(--rosa-escuro);
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .botao:hover {
+            background: #8f3f5f;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 76px 7%;
+            background:
+                radial-gradient(ellipse at 90% 15%, #ffffff 0, transparent 35%),
+                linear-gradient(125deg, #fff5f8 0%, #f8e2ea 55%, #f4d5e1 100%);
+        }
+
+        .hero-conteudo {
+            max-width: 1120px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: center;
+            gap: 45px;
+        }
+
+        .etiqueta {
+            display: inline-block;
+            color: var(--rosa-escuro);
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid var(--dourado-claro);
+            border-radius: 30px;
+            padding: 7px 15px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        .hero h2 {
+            font-family: Georgia, serif;
+            font-size: clamp(38px, 5vw, 60px);
+            line-height: 1.12;
+            font-weight: normal;
+            color: #724355;
+            margin-bottom: 22px;
+        }
+
+        .hero h2 span {
+            color: var(--rosa-escuro);
+            font-style: italic;
+        }
+
+        .hero p {
+            max-width: 510px;
+            color: #765d68;
+            font-size: 16px;
+            line-height: 1.9;
+            margin-bottom: 28px;
+        }
+
+        .hero-destaque {
+            min-height: 290px;
+            display: grid;
+            place-items: center;
+            position: relative;
+        }
+
+
+
+.foto-pudim {
+    width: 280px;
+    height: 280px;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 2px solid #ead9ae;
+    box-shadow: 0 12px 32px rgba(116, 69, 88, 0.12);
+    display: block;
+    margin: auto;
+}
+
+
+        .circulo {
+            width: min(300px, 70vw);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid var(--dourado-claro);
+            box-shadow: 0 15px 45px rgba(150, 91, 112, 0.10);
+            font-size: clamp(100px, 14vw, 155px);
+        }
+
+        .selo {
+            position: absolute;
+            right: 2%;
+            bottom: 18px;
+            background: white;
+            color: var(--rosa-escuro);
+            border: 1px solid var(--dourado-claro);
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 12px;
+            font-family: Georgia, serif;
+            font-size: 14px;
+            line-height: 1.3;
+            transform: rotate(8deg);
+        }
+
+        .beneficios {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1120px;
+            margin: -1px auto 0;
+            padding: 28px 7%;
+            background: white;
+        }
+
+        .beneficio {
+            text-align: center;
+            padding: 8px;
+        }
+
+        .beneficio strong {
+            display: block;
+            color: var(--rosa-escuro);
+            font-family: Georgia, serif;
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        .beneficio span {
+            color: var(--texto-suave);
+            font-size: 13px;
+        }
+
+        .catalogo {
+            padding: 75px 7% 85px;
+            background: #fffafb;
+        }
+
+        .cabecalho-secao {
+            text-align: center;
+            margin-bottom: 38px;
+        }
+
+        .cabecalho-secao .pequeno {
+            color: var(--dourado);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .cabecalho-secao h2 {
+            font-family: Georgia, serif;
+            font-weight: normal;
+            font-size: clamp(30px, 4vw, 40px);
+            color: #724355;
+            margin-bottom: 10px;
+        }
+
+        .cabecalho-secao p {
+            color: var(--texto-suave);
+            font-size: 15px;
+        }
+
+        #produtos {
+            max-width: 1120px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+            gap: 26px;
+        }
+
+        .produto {
+            background: white;
+            border: 1px solid #f0dfe6;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .produto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 38px rgba(116, 69, 88, 0.14);
+        }
+
+        .produto-imagem {
+            height: 235px;
+            overflow: hidden;
+            background: var(--rosa-claro);
+            display: grid;
+            place-items: center;
+            border-bottom: 1px solid #f4e4e9;
+        }
+
+
+.produto-imagem img {
+    width: 50%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+
+}
+
+
+        .produto:hover .produto-imagem img {
+            transform: scale(1.04);
+        }
+
+        .sem-imagem {
+            height: 100%;
+            width: 100%;
+            display: grid;
+            place-items: center;
+            font-size: 65px;
+            background: linear-gradient(135deg, #fff4f8, #f8e2ea);
+        }
+
+        .produto-info {
+            padding: 22px;
+        }
+
+        .produto h3 {
+            font-family: Georgia, serif;
+            font-weight: normal;
+            font-size: 23px;
+            color: #724355;
+            margin-bottom: 9px;
+        }
+
+        .produto .descricao {
+            color: var(--texto-suave);
+            font-size: 14px;
+            line-height: 1.7;
+            min-height: 48px;
+            margin-bottom: 16px;
+        }
+
+        .produto-rodape {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding-top: 15px;
+            border-top: 1px solid #f3e5ea;
+        }
+
+        .preco {
+            color: var(--rosa-escuro);
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        .disponibilidade {
+            color: #8a747d;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .selo-produto {
+            display: inline-block;
+            font-size: 11px;
+            color: #8d6c2e;
+            background: #fff8e8;
+            border: 1px solid #ead9ae;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+        }
+
+        #mensagem {
+            text-align: center;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            color: var(--texto-suave);
+        }
+
+        .carinho {
+            text-align: center;
+            padding: 58px 7%;
+            background: white;
+        }
+
+        .carinho h2 {
+            font-family: Georgia, serif;
+            color: #724355;
+            font-size: 31px;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .carinho p {
+            color: var(--texto-suave);
+            max-width: 600px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+        footer {
+            padding: 36px 7% 22px;
+            text-align: center;
+            color: white;
+            background: #74485a;
+        }
+
+        .footer-marca {
+            font-family: Georgia, serif;
+            font-size: 27px;
+            margin-bottom: 5px;
+        }
+
+        .footer-frase {
+            color: #f7e6ed;
+            font-size: 14px;
+        }
+
+        .footer-linha {
+            width: 70px;
+            height: 1px;
+            background: var(--dourado-claro);
+            margin: 20px auto;
+        }
+
+        .copyright {
+            color: #ead4dd;
+            font-size: 12px;
+        }
+
+        @media (max-width: 760px) {
+            .topo {
+                padding: 16px 5%;
+            }
+            .foto-pudim {
+    width: 150px;
+    height: 150px;
+}
+
+            .navegacao {
+                width: 100%;
+                justify-content: space-between;
+                gap: 12px;
+            }
+
+            .navegacao .botao {
+                padding: 10px 15px;
+            }
+
+            .hero {
+                padding: 52px 6% 35px;
+            }
+
+            .hero-conteudo {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .hero h2 {
+                font-size: 42px;
+            }
+
+            .hero-destaque {
+                min-height: 245px;
+            }
+
+            .circulo {
+                width: 220px;
+                font-size: 110px;
+            }
+
+            .selo {
+                right: 8%;
+                bottom: 4px;
+                width: 82px;
+                height: 82px;
+                font-size: 12px;
+            }
+
+            .beneficios {
+                padding: 20px 4%;
+                gap: 8px;
+            }
+
+            .beneficio strong {
+                font-size: 15px;
+            }
+
+            .beneficio span {
+                font-size: 11px;
+            }
+
+            .catalogo {
+                padding: 55px 5%;
+            }
+
+            #produtos {
+                grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+                gap: 17px;
+            }
+
+            .produto-imagem {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .marca h1 {
+                font-size: 22px;
+            }
+
+            .navegacao {
+                font-size: 12px;
+            }
+
+            .navegacao .botao {
+                font-size: 12px;
+            }
+
+            .hero h2 {
+                font-size: 36px;
+            }
+
+            #produtos {
+                grid-template-columns: 1fr;
+                }
+
+            .produto-imagem {
+                height: 100px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="topo">
+    <a class="marca" href="/" aria-label="Cozinha da Jam - página inicial">
+        <span class="marca-icone" aria-hidden="true">🌸</span>
+        <span>
+            <h1>Cozinha da Jam</h1>
+            <p>Feito com carinho, servido com amor.</p>
+        </span>
+    </a>
+
+    <nav class="navegacao" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#produtos-secao">Nossos doces</a>
+        <a href="#sobre">Nossa essência</a>
+        <a class="botao" href="#produtos-secao">Ver delícias ♡</a>
+    </nav>
+</header>
+
+<main>
+    <section class="hero" id="inicio">
+        <div class="hero-conteudo">
+            <div>
+                <span class="etiqueta">♡ Doces artesanais feitos com amor</span>
+                <h2>Pequenos doces,<br>grandes momentos <span>de amor.</span></h2>
+                <p>
+                    Seja bem-vindo à Cozinha da Jam! Cada delícia é preparada
+                    com cuidado, carinho e aquele toque especial que transforma
+                    momentos simples em lembranças doces.
+                </p>
+                <a class="botao" href="#produtos-secao">Conheça nossos doces ♡</a>
+            </div>
+
+            <img
+                    src="/images/Pudim.jpeg"
+                    alt="Pudim de leite condensado da Cozinha da Jam"
+                    class="foto-pudim"
+            >
+
+        </div>
+    </section>
+
+    <section class="beneficios" aria-label="Nossos diferenciais">
+        <div class="beneficio">
+            <strong>♡ Feito à mão</strong>
+            <span>Cuidado em cada detalhe</span>
+        </div>
+        <div class="beneficio">
+            <strong>✧ Ingredientes selecionados</strong>
+            <span>Qualidade e sabor</span>
+        </div>
+        <div class="beneficio">
+            <strong>♡ Momentos especiais</strong>
+            <span>Doces para compartilhar</span>
+        </div>
+    </section>
+
+    <section class="catalogo" id="produtos-secao">
+        <div class="cabecalho-secao">
+            <p class="pequeno">Feitos especialmente para você</p>
+            <h2>Nossas delícias</h2>
+            <p>Descubra os sabores que preparamos com todo carinho.</p>
+        </div>
+
+        <p id="mensagem" role="status" aria-live="polite">Carregando nossos doces...</p>
+        <section id="produtos" aria-label="Lista de produtos"></section>
+    </section>
+
+    <section class="carinho" id="sobre">
+        <h2>Um carinho em forma de doce ♡</h2>
+        <p>
+            Na Cozinha da Jam, acreditamos que os pequenos detalhes tornam
+            a vida mais especial. Por isso, cada doce é preparado com amor,
+            para levar sabor, aconchego e felicidade até você.
+        </p>
+    </section>
+</main>
+
+<footer>
+    <p class="footer-marca">Cozinha da Jam ♡</p>
+    <p class="footer-frase">Um toque de carinho em cada doce.</p>
+    <div class="footer-linha"></div>
+    <p class="copyright">Doces artesanais feitos com amor.</p>
+</footer>
+
+<script>
+    async function carregarProdutos() {
+        const lista = document.getElementById("produtos");
+        const mensagem = document.getElementById("mensagem");
+
+        try {
+            const resposta = await fetch("/api/produtos");
+
+            if (!resposta.ok) {
+                throw new Error("Não foi possível carregar os produtos.");
+            }
+
+            const produtos = await resposta.json();
+            lista.replaceChildren();
+
+            const disponiveis = produtos.filter(
+                produto => produto.ativo === true
+            );
+
+            if (disponiveis.length === 0) {
+                mensagem.textContent =
+                    "Em breve teremos delícias por aqui! ♡";
+                return;
+            }
+
+            mensagem.textContent = "";
+
+            disponiveis.forEach(produto => {
+                const card = document.createElement("article");
+                card.className = "produto";
+
+                const areaImagem = document.createElement("div");
+                areaImagem.className = "produto-imagem";
+
+                const imagem = document.createElement("img");
+                imagem.alt = produto.nome || "Doce artesanal";
+                imagem.loading = "lazy";
+
+                const caminhoImagem = (produto.imagem || "").trim();
+
+                if (caminhoImagem) {
+                    imagem.src = caminhoImagem.startsWith("/")
+                        ? caminhoImagem
+                        : "/" + caminhoImagem;
+
+                    imagem.onerror = () => {
+                        const semImagem = document.createElement("div");
+                        semImagem.className = "sem-imagem";
+                        semImagem.textContent = "🍮";
+                        semImagem.setAttribute("aria-label", "Doce artesanal");
+                        imagem.replaceWith(semImagem);
+                    };
+
+                    areaImagem.append(imagem);
+                } else {
+                    const semImagem = document.createElement("div");
+                    semImagem.className = "sem-imagem";
+                    semImagem.textContent = "🍮";
+                    semImagem.setAttribute("aria-label", "Doce artesanal");
+                    areaImagem.append(semImagem);
+                }
+
+                const info = document.createElement("div");
+                info.className = "produto-info";
+
+                const selo = document.createElement("span");
+                selo.className = "selo-produto";
+                selo.textContent = "♡ Feito com carinho";
+
+                const nome = document.createElement("h3");
+                nome.textContent = produto.nome || "Doce artesanal";
+
+                const descricao = document.createElement("p");
+                descricao.className = "descricao";
+                descricao.textContent =
+                    produto.descricao || "Uma delícia preparada com carinho.";
+
+                const rodape = document.createElement("div");
+                rodape.className = "produto-rodape";
+
+                const preco = document.createElement("p");
+                preco.className = "preco";
+                preco.textContent = Number(produto.preco).toLocaleString(
+                    "pt-BR",
+                    { style: "currency", currency: "BRL" }
+                );
+
+                rodape.append(preco);
+
+                const estoque = document.createElement("p");
+                estoque.className = "disponibilidade";
+                estoque.textContent =
+                    Number(produto.estoque) > 0
+                        ? "Disponível"
+                        : "Consulte a disponibilidade";
+
+                info.append(selo, nome, descricao, rodape, estoque);
+                card.append(areaImagem, info);
+                lista.append(card);
+            });
+
+        } catch (erro) {
+            mensagem.textContent =
+                "Não foi possível carregar nossos doces. " +
+                "Verifique se a aplicação está funcionando.";
+            console.error("Erro ao carregar produtos:", erro);
+        }
+    }
+
+    carregarProdutos();
+</script>
+
+</body>
+</html>
